@@ -1,0 +1,123 @@
+#.cursorrules file for promz (Go Library)
+
+Lessons:
+  - Name: "Go Best Practices"
+    Description: "General Go best practices for maintainable and efficient code."
+    Key Takeaways:
+      - "Write clear and concise code with meaningful variable and function names."
+      - "Follow Go's style conventions (go fmt)."
+      - "Use proper error handling (check errors, return errors)."
+      - "Write unit tests for all code."
+      - "Document code with comments for godoc."
+
+  - Name: "Library Design"
+    Description: "Principles for designing a well-structured and easy-to-use library."
+    Key Takeaways:
+      - "Design a clear and consistent API."
+      - "Keep functions focused and avoid unnecessary dependencies."
+      - "Provide good documentation and examples."
+      - "Consider versioning for future compatibility."
+
+  - Name: "Testing Best Practices"
+    Description: "Guidelines for writing effective unit tests."
+    Key Takeaways:
+      - "Write tests for all functions and code paths."
+      - "Use table-driven tests for multiple test cases."
+      - "Use mocking to isolate units under test."
+      - "Aim for high test coverage."
+
+Phases:
+  - Name: "Initial Development"
+    Description: "Building the core functionality of the promz library."
+    Features:
+      - "Reading.promz files"
+      - "Writing.promz files"
+      - "Validating.promz files"
+    Tasks:
+      - "Implement promz.Read function"
+      - "Implement promz.Write function"
+      - "Define Promz, Metadata, Content, Example, Variable, and History structs"
+    Status: "In Progress"
+
+  - Name: "Enhancements"
+    Description: "Adding more features and improving the library."
+    Features:
+      - "Advanced validation"
+      - "Helper functions for working with.promz data"
+      - "Support for different.promz versions"
+    Tasks:
+      - "Implement schema validation for.promz files"
+      - "Add helper functions for data manipulation"
+      - "Implement version handling for.promz files"
+    Status: "Planned"
+
+  - Name: "Community and Documentation"
+    Description: "Preparing the library for open source and improving documentation."
+    Features:
+      - "Comprehensive documentation"
+      - "Example code"
+      - "Contribution guidelines"
+    Tasks:
+      - "Write detailed documentation for godoc"
+      - "Create example code snippets"
+      - "Write a contributing guide"
+    Status: "Planned"
+
+Technology Stack:
+  - Name: "Go"
+    Description: "Programming language."
+    Version: "1.20+"
+    Rationale: "Performance, concurrency, and strong standard library."
+
+Current Tasks:
+  - Name: "promz.Read Function"
+    Status: "In Progress"
+    Description: "Implement the function to read and parse.promz files."
+    Next Steps:
+      - "Implement JSON unmarshaling into Promz struct."
+      - "Handle errors during file reading and parsing."
+      - "Write unit tests for different scenarios."
+
+  - Name: "promz.Write Function"
+    Status: "Planned"
+    Description: "Implement the function to write Promz data to.promz files."
+    Next Steps:
+      - "Implement JSON marshaling from Promz struct."
+      - "Handle errors during file writing."
+      - "Write unit tests."
+
+Prompts:
+  - Name: "Function Implementation"
+    Prompt: |
+      I need to implement the Go function [function name].  It should [describe what the function does].
+      The function signature should be [function signature].  Please provide the Go code, including error
+      handling and unit tests.
+
+  - Name: "Unit Test Development"
+    Prompt: |
+      I need to write unit tests for the Go function [function name].  It [describes what the function does].
+      Please provide the Go test code, including different test cases (happy path, error cases, edge cases).
+      Use table-driven tests where appropriate.
+
+Features:
+  - Name: "Advanced Validation"
+    Description: "Implement schema validation for.promz files using a JSON schema library."
+    Status: "Planned"
+    Next Steps:
+      - "Choose a JSON schema library for Go."
+      - "Implement validation logic."
+
+  - Name: "Helper Functions"
+    Description: "Add helper functions for common operations on.promz data."
+    Status: "Planned"
+    Next Steps:
+      - "Identify common use cases."
+      - "Implement helper functions."
+
+Testing:
+  - Name: "Unit Testing"
+    Status: "In Progress"
+    Description: "Thorough unit tests for all functions."
+    Next Steps:
+      - "Aim for 100% test coverage."
+      - "Use mocking for external dependencies."
