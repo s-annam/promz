@@ -228,3 +228,145 @@ func TestValidate(t *testing.T) {
 		})
 	}
 }
+
+func TestGetPromptText(t *testing.T) {
+	promz := Promz{
+		Content: Content{
+			Prompt: "Write a short story about a robot who learns to love.",
+		},
+	}
+
+	prompt := GetPromptText(promz)
+	if prompt != "Write a short story about a robot who learns to love." {
+		t.Errorf("expected prompt 'Write a short story about a robot who learns to love.', got %s", prompt)
+	}
+}
+
+func TestSetPromptText(t *testing.T) {
+	promz := Promz{
+		Content: Content{
+			Prompt: "",
+		},
+	}
+
+	SetPromptText(&promz, "Write a short story about a robot who learns to love.")
+	if promz.Content.Prompt != "Write a short story about a robot who learns to love." {
+		t.Errorf("expected prompt 'Write a short story about a robot who learns to love.', got %s", promz.Content.Prompt)
+	}
+}
+
+func TestSetPromptTextEmpty(t *testing.T) {
+	promz := Promz{
+		Content: Content{
+			Prompt: "Initial prompt",
+		},
+	}
+
+	SetPromptText(&promz, "")
+	if promz.Content.Prompt != "" {
+		t.Errorf("expected empty prompt, got '%s'", promz.Content.Prompt)
+	}
+}
+
+func TestSetPromptTextMultiline(t *testing.T) {
+	promz := Promz{
+		Content: Content{
+			Prompt: "",
+		},
+	}
+
+	multilinePrompt := "Line 1\nLine 2\nLine 3"
+	SetPromptText(&promz, multilinePrompt)
+	if promz.Content.Prompt != multilinePrompt {
+		t.Errorf("expected multiline prompt, got %s", promz.Content.Prompt)
+	}
+}
+
+func TestAddExample(t *testing.T) {
+	promz := Promz{
+		Content: Content{
+			Examples: []Example{},
+		},
+	}
+
+	example := Example{Input: "input1", Output: "output1"}
+	AddExample(&promz, example)
+
+	if len(promz.Content.Examples) != 1 {
+		t.Errorf("expected 1 example, got %d", len(promz.Content.Examples))
+	}
+
+	if promz.Content.Examples[0] != example {
+		t.Errorf("expected example %+v, got %+v", example, promz.Content.Examples[0])
+	}
+}
+
+func TestGetExamples(t *testing.T) {
+	examples := []Example{
+		{Input: "input1", Output: "output1"},
+		{Input: "input2", Output: "output2"},
+	}
+	promz := Promz{
+		Content: Content{
+			Examples: examples,
+		},
+	}
+
+	result := GetExamples(promz)
+
+	if len(result) != len(examples) {
+		t.Errorf("expected %d examples, got %d", len(examples), len(result))
+	}
+
+	for i, example := range examples {
+		if result[i] != example {
+			t.Errorf("expected example %+v, got %+v", example, result[i])
+		}
+	}
+}
+
+func TestAddTag(t *testing.T) {
+	promz := Promz{
+		Metadata: Metadata{
+			Tags: []string{"tag1", "tag2"},
+		},
+	}
+
+	AddTag(&promz, "tag3")
+
+	if len(promz.Metadata.Tags) != 3 {
+		t.Errorf("expected 3 tags, got %d", len(promz.Metadata.Tags))
+	}
+
+	AddTag(&promz, "tag2") // Adding duplicate tag
+
+	if len(promz.Metadata.Tags) != 3 {
+		t.Errorf("expected 3 tags after adding duplicate, got %d", len(promz.Metadata.Tags))
+	}
+}
+
+func TestRemoveTag(t *testing.T) {
+	promz := Promz{
+		Metadata: Metadata{
+			Tags: []string{"tag1", "tag2", "tag3"},
+		},
+	}
+
+	RemoveTag(&promz, "tag2")
+
+	if len(promz.Metadata.Tags) != 2 {
+		t.Errorf("expected 2 tags, got %d", len(promz.Metadata.Tags))
+	}
+
+	for _, tag := range promz.Metadata.Tags {
+		if tag == "tag2" {
+			t.Errorf("tag2 should have been removed")
+		}
+	}
+
+	RemoveTag(&promz, "tag4") // Removing non-existent tag
+
+	if len(promz.Metadata.Tags) != 2 {
+		t.Errorf("expected 2 tags after removing non-existent tag, got %d", len(promz.Metadata.Tags))
+	}
+}

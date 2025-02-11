@@ -89,15 +89,55 @@ Current Tasks:
 Prompts:
   - Name: "Function Implementation"
     Prompt: |
-      I need to implement the Go function [function name].  It should [describe what the function does].
-      The function signature should be [function signature].  Please provide the Go code, including error
-      handling and unit tests.
+      I need to implement the Go function `[function name]`. It should [describe what
+      the function does]. The function signature should be `[function signature]`.
+      Please provide the Go code, including error handling and unit tests.
+
+      For example:
+
+      I need to implement the Go function `validatePromptText`. It should validate the
+      prompt text in a `Promz` struct, ensuring it is not empty. The function signature
+      should be `func validatePromptText(p *Promz) error`. Please provide the Go code,
+      including error handling and unit tests.
 
   - Name: "Unit Test Development"
     Prompt: |
-      I need to write unit tests for the Go function [function name].  It [describes what the function does].
-      Please provide the Go test code, including different test cases (happy path, error cases, edge cases).
-      Use table-driven tests where appropriate.
+      I need to write unit tests for the Go function `[function name]`. It [describes
+      what the function does]. Please provide the Go test code, including different test
+      cases (happy path, error cases, edge cases). Use table-driven tests where
+      appropriate.
+
+      For example:
+
+      I need to write unit tests for the Go function `promz.Read`. It reads a `.promz`
+      file and returns a `Promz` struct. Please provide the Go test code, including test
+      cases for valid `.promz` files, invalid files (e.g., with missing fields), and error
+      conditions (e.g., file not found).
+
+  - Name: "Documentation Generation"
+    Prompt: |
+      I need to write GoDoc comments for the function `[function name]`. It [describes
+      what the function does]. The function signature is `[function signature]`. Please
+      provide the GoDoc comments, including a concise description, parameter and return
+      value explanations, and an example usage snippet.
+
+      For example:
+
+      I need to write GoDoc comments for the function `promz.AddExample`. It adds an
+      example to a `Promz` struct. The function signature is
+      `func AddExample(p *Promz, e Example) error`. Please provide the GoDoc comments.
+
+  - Name: "Example Code"
+    Prompt: |
+      I need to create an example Go program that demonstrates how to use the `promz`
+      library to [describe the task]. Please provide the Go code, including comments
+      explaining the steps.
+
+      For example:
+
+      I need to create an example Go program that demonstrates how to use the `promz`
+      library to read a `.promz` file, modify the prompt text, and write the updated
+      data back to the file. Please provide the Go code, including comments.
 
 Features:
   - Name: "Advanced Validation"
